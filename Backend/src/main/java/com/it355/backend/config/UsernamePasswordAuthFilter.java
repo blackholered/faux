@@ -31,13 +31,15 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
             HttpServletResponse httpServletResponse,
             FilterChain filterChain) throws ServletException, IOException {
 
+
+        try {
         if ("/auth/login".equals(httpServletRequest.getServletPath())
                 && HttpMethod.POST.matches(httpServletRequest.getMethod())) {
             CredentialsDTO credentialsDto = MAPPER.readValue(httpServletRequest.getInputStream(), CredentialsDTO.class);
 
-            try {
-                SecurityContextHolder.getContext().setAuthentication(
-                        userAuthenticationProvider.validateCredentials(credentialsDto));
+            SecurityContextHolder.getContext().setAuthentication(
+                    userAuthenticationProvider.validateCredentials(credentialsDto));
+        }
             } catch (ResponseException ex) {
                 SecurityContextHolder.clearContext();
                 httpServletResponse.setStatus(ex.getResponse());
@@ -51,9 +53,7 @@ public class UsernamePasswordAuthFilter extends OncePerRequestFilter {
                 MAPPER.writeValue(httpServletResponse.getOutputStream(), new ErrorResponse("A fatal error has occurred while processing the request."));
                 return;
             }
-        }
-
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
+ }
 
-}

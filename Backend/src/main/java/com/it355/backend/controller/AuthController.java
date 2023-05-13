@@ -5,6 +5,8 @@ import com.it355.backend.config.UserAuthenticationProvider;
 import com.it355.backend.dto.CredentialsDTO;
 import com.it355.backend.dto.LoginDTO;
 import com.it355.backend.entity.User;
+import com.it355.backend.exception.ResponseException;
+import com.it355.backend.exception.impl.NoElementException;
 import com.it355.backend.response.ErrorResponse;
 import com.it355.backend.response.SuccessResponse;
 import com.it355.backend.service.UserService;
@@ -51,7 +53,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginDTO> signIn(@AuthenticationPrincipal LoginDTO user) {
+    public ResponseEntity<LoginDTO> signIn(@AuthenticationPrincipal LoginDTO user) throws ResponseException {
         user.setToken(userAuthenticationProvider.createToken(user));
         return ResponseEntity.ok(user);
     }

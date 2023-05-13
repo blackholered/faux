@@ -4,6 +4,8 @@ import com.it355.backend.dto.CredentialsDTO;
 import com.it355.backend.dto.LoginDTO;
 import com.it355.backend.entity.User;
 import com.it355.backend.exception.impl.BadRequestException;
+import com.it355.backend.exception.impl.ElementAlreadyExistsException;
+import com.it355.backend.exception.impl.NoElementException;
 import com.it355.backend.service.UserService;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

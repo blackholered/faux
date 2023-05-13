@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.it355.backend.dto.CredentialsDTO;
+import com.it355.backend.exception.impl.NoElementException;
 import com.it355.backend.service.impl.AuthenticationServiceImpl;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
