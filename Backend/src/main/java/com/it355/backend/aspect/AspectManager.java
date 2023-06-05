@@ -30,8 +30,7 @@ public class AspectManager {
         Object[] args = joinPoint.getArgs();
         Integer userId = null;
         for (Object arg : args) {
-            if (arg instanceof LoginDTO) {
-                LoginDTO desiredVariable = (LoginDTO) arg;
+            if (arg instanceof LoginDTO desiredVariable) {
                 userId = desiredVariable.getId();
                 break;
             }
