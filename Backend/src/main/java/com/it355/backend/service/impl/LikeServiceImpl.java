@@ -42,5 +42,12 @@ public class LikeServiceImpl implements LikeService {
     @Override
     public Like findByVideoAndUser(Video video, User user) {
 
+        return likeRepository.findByVideoAndUser(video, user)
+                .orElseThrow(() -> new NoElementException("Video likes not found"));
+
+    }
+    @Override
+    public void delete(Like like) {
+        likeRepository.delete(like);
     }
 }

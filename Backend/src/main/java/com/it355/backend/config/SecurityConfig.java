@@ -74,7 +74,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/videos", "/videos/uploads/*", "/videos/search", "/videos/get", "/comments/count", "/comments/get").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/videos", "/videos/uploads/*", "/videos/search", "/videos/get", "/comments/count", "/comments/get", "/likes/count").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/auth/login", "/auth/register").permitAll()
                         .anyRequest().authenticated())
         ;

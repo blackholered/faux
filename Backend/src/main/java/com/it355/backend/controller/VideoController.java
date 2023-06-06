@@ -11,6 +11,7 @@ import com.it355.backend.service.UserService;
 import com.it355.backend.service.VideoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -39,8 +40,8 @@ public class VideoController {
     private final VideoService videoService;
     private final UserService userService;
 
-
-
+    @Value("${cdn.directory}")
+    private String cdnDirectory;
 
     @DeleteMapping("/delete")
     public ResponseEntity<Object> deleteVideo(
@@ -155,7 +156,7 @@ public class VideoController {
 
     @GetMapping("/uploads/{fileName:.+}")
     public ResponseEntity<Resource> getStatic(@PathVariable String fileName) {
-        Path file = Paths.get("C:/Users/korisnik/Desktop/uploads/" + fileName);
+        Path file = Paths.get(cdnDirectory + fileName);
         ByteArrayResource resource;
         try {
             resource = new ByteArrayResource(Files.readAllBytes(file));

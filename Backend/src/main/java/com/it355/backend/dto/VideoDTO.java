@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VideoDTO {
-    private Integer id;
+    private int id;
     @Size(min = 5, max = 100, message = "Video name can be between 5 and 100 characters.")
     private String name;
     @Size(max = 256, message = "Video description can be up to 256 characters long.")

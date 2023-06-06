@@ -13,5 +13,7 @@ public interface LikeService {
 
     Like findByVideoAndUser(Video video, User user);
 
+    void delete(Like like);
+
 
 }

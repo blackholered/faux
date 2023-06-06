@@ -13,6 +13,7 @@ import net.bramp.ffmpeg.FFmpeg;
 import net.bramp.ffmpeg.FFmpegExecutor;
 import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.builder.FFmpegBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,15 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class VideoServiceImpl implements VideoService {
+
+    @Value("${cdn.directory}")
+    private String cdnDirectory;
+
+    @Value("${ffmpeg.path}")
+    private String ffmpegPath;
+
+    @Value("${ffprobe.path}")
+    private String ffprobePath;
 
     private final VideoRepository videoRepository;
 
@@ -60,12 +70,8 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Video save(VideoFileDTO videoFileDTO, User user) throws IOException {
 
-        String cdnDirectory = "C:/Users/korisnik/Desktop/uploads/";
         String fileName = UUID.randomUUID().toString().replaceAll("-", "");
         int sec = 15;
-        String ffmpegPath = "E:/Downloads/ffmpeg/bin/ffmpeg.exe";
-        String ffprobePath = "E:/Downloads/ffmpeg/bin/ffprobe.exe";
-
         FFmpeg ffmpeg = new FFmpeg(ffmpegPath);
         FFprobe ffprobe = new FFprobe(ffprobePath);
 
